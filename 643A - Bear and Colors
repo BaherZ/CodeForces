@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin>>n;
+    int a[n+11];
+    for(int i=1;i<=n;++i)
+        cin>>a[i];
+
+    int ans[n+11],cnt[n+11];
+    memset(ans,0,sizeof ans);
+    for(int i=1;i<=n;++i)
+    {
+        memset(cnt,0,sizeof cnt);
+        int x = a[i];
+        int mx=0,best=0;
+        for(int j=i;j<=n;++j)
+        {
+            int t = a[j];
+            cnt[t]++;
+            if(cnt[t]>mx or (cnt[t]==mx and best>t))
+            {
+                best=t;
+                mx=cnt[t];
+            }
+            ans[best]++;
+        }
+    }
+    for(int i=1;i<=n;++i)
+        cout<<ans[i]<<" ";
+    return 0;
+}

@@ -1,0 +1,10 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	long long n,a,b,p,q;
+	cin>>n>>a>>b>>p>>q;
+	
+	cout<<( (n/a)*p+(n/b)*q )-( ( (n*__gcd(a,b))/(a*b) ) *min(p,q) );
+	return 0;
+}

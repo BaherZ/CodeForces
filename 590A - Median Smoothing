@@ -1,0 +1,46 @@
+#include <iostream>
+
+using namespace std;
+int ans=0;
+void solve(int a[],int l,int r)
+{
+    if(r-l==1 or r==l)
+        return;
+    if(a[l]==a[r])
+    {
+        ans=max(ans,(r-l)/2);
+        for(int i=l+1;i<=r;++i)
+            a[i]=a[l];
+    }
+    else
+    {
+        int k = (l+r+1)/2;
+        for(int i=l+1; i<k; i++)
+          a[i] = a[l];
+        for(int i=k; i<r; i++)
+          a[i] = a[r];
+        ans=max(ans,(r-l)/2);
+    }
+}
+int main()
+{
+    int n;
+    cin>>n;
+    int a[n+11];
+    for(int i=1;i<=n;++i)
+        cin>>a[i];
+    int l=1;
+    for(int i=1;i<=n;++i)
+    {
+        if(i==n or a[i]==a[i+1])
+        {
+            //cout<<"l is: "<<l<<" and i is: "<<i<<endl;
+            solve(a,l,i);
+            l=i+1;
+        }
+    }
+    cout<<ans<<endl;
+    for(int i=1;i<=n;++i)
+        cout<<a[i]<<" ";
+    return 0;
+}

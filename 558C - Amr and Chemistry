@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int cnt[100005], vis[100005], steps[100005];
+
+int main()
+{
+  ios_base::sync_with_stdio(0);
+  int n, res = 2000000000, x, y;
+  scanf("%d", &n);
+  for(int i=1;i<=n;i++)
+  {
+    scanf("%d", &x);
+    queue<pair<int, int> > q;
+    q.push(make_pair(x, 0));
+    while(!q.empty())
+    {
+      x = q.front().first;
+      y = q.front().second;
+      q.pop();
+      if(x > 100003) continue;
+      if(vis[x] == i) continue;
+      vis[x] = i;
+      steps[x]+=y;
+      cnt[x]++;
+      q.push(make_pair(x * 2, y + 1));
+      q.push(make_pair(x / 2, y + 1));
+    }
+  }
+  for(int i=0;i<=100000;i++)
+    if(cnt[i] == n)
+      if(res > steps[i])
+        res = steps[i];
+  printf("%d", res);
+  return 0;
+}

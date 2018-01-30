@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+int vis[222222];
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    int a[n+11];
+    int root=-1,ans=0;
+    for(int i=1;i<=n;++i)
+    {
+        scanf("%d",&a[i]);
+        if(a[i]==i)
+            root=a[i];
+    }
+    for(int i=1;i<=n;++i)
+    {
+        if(!vis[i])
+        {
+            int j=i;
+            while(!vis[j])
+            {
+                vis[j]=i;
+                j=a[j];
+            }
+            if(vis[j]!=i)
+                continue;
+            if(root==-1)
+            {
+                root=j;
+                a[root]=root;
+                ans++;
+                continue;
+            }
+            if(j!=root)
+            {
+                a[j]=root;
+                ans++;
+            }
+        }
+    }
+    printf("%d\n",ans);
+    for(int i=1;i<=n;++i)
+        printf("%d ",a[i]);
+    return 0;
+}
